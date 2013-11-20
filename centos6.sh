@@ -22,9 +22,9 @@ service mysqld start || exit 1
 # 3.2 WordPress用データベースの作成
 # 3.3 ユーザーにDBアクセスの権限を割り当て
 MYSQL_PASSWORD=`mkpasswd -s 0 -l 8`
-mysql -u root -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY $MYSQL_PASSWORD;" || exit 1
+mysql -u root -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';" || exit 1
 mysql -u root -e 'CREATE DATABASE IF NOT EXISTS `wordpress` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;' || exit 1
-mysql -u root -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost' IDENTIFIED BY 'wordpress';" || exit 1
+mysql -u root -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';" || exit 1
 
 # ④WordPress配置
 # 4.1 ディレクトリ移動
